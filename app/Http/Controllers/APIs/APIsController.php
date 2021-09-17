@@ -5,19 +5,26 @@ namespace App\Http\Controllers\APIs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-use App\API;
+//use App\API;
+//namespace App\Http\Controllers;
 
+//use Illuminate\Http\Request;
+use App\Models\API;
+use Illuminate\Support\Facades\Hash;
 class APIsController extends Controller
 {
 
 
-    public function submit(Request $request){
-        $api=array(
-            $name=>$request->name,
-            $email=>$request->email,
-            $password =>Hash::make($request->password)
-        );
-        DB::table('a_p_i_s')->insert($api);
+    public function register(Request $request){
+      // dd($request->name);
+       $apisave = new API;
+        
+            $apisave->name=$request->name;
+            $apisave->email=$request->email;
+            $apisave->password =Hash::make($request->password);
+        
+        $save = $apisave->save();
+       // DB::table('a_p_i_s')->insert($api);
         echo "Data excueted successfully";
       
 
